@@ -50,11 +50,17 @@ print(filename_list)
 #             wf.write(contents[2].get_text())
 def get_pic(file):
     with open(os.path.join("./keywords", file), 'r', encoding='utf-8') as f:
-        #print(f.readlines())
         for line in f:
             pic_name = line.strip()+'.png'
-            print(pic_name)
-            capture('https://zh.wikipedia.org/wiki/'+urllib.parse.quote(line.strip()), pic_name)
+            res = requests.get('https://zh.wikipedia.org/wiki/'+urllib.parse.quote(line.strip()),
+                                   proxies=proxies, verify=False, headers=headers)  # 不做SSl证书认证
+            soup = BeautifulSoup(res.text, 'lxml')
+            contents = soup.select('.mw-body-content')
+            cont = contents[2].get_text()
+            if '维基百科目前还没有与上述标题' not in cont:
+                capture('https://zh.wikipedia.org/wiki/'+urllib.parse.quote(line.strip()), pic_name)
+            else:
+                print(line.strip()+'不存在')
 
 
 for filename in filename_list:
