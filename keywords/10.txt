@@ -1,0 +1,11 @@
+散列函数
+hashmap
+时间复杂度
+key
+orderedDict
+defaultdict
+字典
+键值对
+六芒星
+魔法阵
+items

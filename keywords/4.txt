@@ -1,0 +1,9 @@
+RGB
+CMYK
+三基色
+三原色
+Colormode
+random
+randint
+五角星
+
